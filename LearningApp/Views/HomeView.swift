@@ -38,10 +38,17 @@ struct HomeView: View {
                                         HomeViewRow(image: module.content.image, title: "Learn \(module.category)", description: module.content.description, count: "\(module.content.lessons.count) lessons", time: module.content.time)
                                     })
                                 
-                                
-                                
-                                // Test card
-                                HomeViewRow(image: module.test.image, title: "\(module.category) Test", description: module.test.description, count: "\(module.test.questions.count) questions", time: module.test.time)
+                                NavigationLink(
+                                    destination: TestView()
+                                        .onAppear(perform: {
+                                            /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Code@*/ /*@END_MENU_TOKEN@*/
+                                        }),
+                                    tag: module.id,
+                                    selection: $model.currentTestSelected,
+                                    label: {
+                                        // Test card
+                                        HomeViewRow(image: module.test.image, title: "\(module.category) Test", description: module.test.description, count: "\(module.test.questions.count) questions", time: module.test.time)
+                                    })
                             }
                             
                         }
