@@ -41,7 +41,7 @@ struct HomeView: View {
                                 NavigationLink(
                                     destination: TestView()
                                         .onAppear(perform: {
-                                            /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Code@*/ /*@END_MENU_TOKEN@*/
+                                            model.beginTest(module.id)
                                         }),
                                     tag: module.id,
                                     selection: $model.currentTestSelected,

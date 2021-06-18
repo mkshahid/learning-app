@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import AVKit // contains video player
+import AVKit
 
 struct ContentDetailView: View {
     
@@ -17,9 +17,8 @@ struct ContentDetailView: View {
         let lesson = model.currentLesson
         let url = URL(string: Constants.videoHostUrl + (lesson?.video ?? ""))
         
-        
         VStack {
-            // Only show video if we get valid URL
+            // Only show video if we get a valid URL
             if url != nil {
                 VideoPlayer(player: AVPlayer(url: url!))
                     .cornerRadius(10)
@@ -28,15 +27,18 @@ struct ContentDetailView: View {
             // Description
             CodeTextView()
             
-            // Show next lesson button only if there is a next lesson
+            // Show next lesson button, only if there is a next lesson
             if model.hasNextLesson() {
+                
                 Button(action: {
                     
                     // Advance the lesson
                     model.nextLesson()
+                    
                 }, label: {
                     
                     ZStack {
+                    
                         RectangleCard(color: Color.green)
                             .frame(height:48)
                         
@@ -44,19 +46,20 @@ struct ContentDetailView: View {
                             .foregroundColor(Color.white)
                             .bold()
                     }
-                    
-                    
                 })
             }
             else {
-                // Show the complete button
+                // Show the complete button instead
+                
                 Button(action: {
                     
                     // Take the user back to the homeview
                     model.currentContentSelected = nil
+                    
                 }, label: {
                     
                     ZStack {
+                    
                         RectangleCard(color: Color.green)
                             .frame(height:48)
                         
@@ -64,8 +67,6 @@ struct ContentDetailView: View {
                             .foregroundColor(Color.white)
                             .bold()
                     }
-                    
-                    
                 })
             }
         }
@@ -77,5 +78,6 @@ struct ContentDetailView: View {
 struct ContentDetailView_Previews: PreviewProvider {
     static var previews: some View {
         ContentDetailView()
+            .environmentObject(ContentModel())
     }
 }
